@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './page-root.css';
 
 const PageRoot__Head = ({ children }) => (
 	<head class="html__head">
