@@ -3,31 +3,38 @@ const glob = require('glob');
 
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin')
+const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
-const entries = [
+const unwrapGlob = arr => arr.reduce((res, entry) => res.concat(glob.sync(entry)), []);
+
+const getStaticPath = blob => {
+  const blobExt = path.extname(blob);
+  const blobPath = path.resolve(__dirname, blob);
+  const rootPath = path.resolve(__dirname, 'source/pages');
+  const name = blobPath.substr(rootPath.length + 1);
+
+  return name.substr(0, name.length - blobExt.length);
+}
+
+const globs = [
   './source/pages/**/*.jsx'
-]
+];
 
-const webpackEntries = 
-  entries
-    .reduce((res, entry) => {
-      res = res.concat(glob.sync(entry));
-      return res;
-    }, [])
-    .reduce((res, entry, i) => {
-      const name = path.basename(entry, path.extname(entry));
-      res[name] = entry;  
-      return res;
-    }, {});
+const paths = 
+  unwrapGlob(globs)
+    .map(getStaticPath)
+    .map(p => p + '.html');
 
 module.exports = {
-  entry: webpackEntries,
+  entry: {
+    main: './source/main.jsx'
+  },
   output: {
-    filename: '[name].js',
+    filename: '/assets/bundle.js',
     path: './dist',
     libraryTarget: 'umd'
   },
+  publicPath: './dist/',
   module: {
     loaders: [
       {
@@ -42,15 +49,14 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'file?context=./source/pages&name=/assets/images/[name]-[md5:hash:hex:8].[ext]',
           'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ]
       }
     ]
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js'),
-    new ExtractTextPlugin('[name].css'),
-    new StaticSiteGeneratorPlugin('index')
+    new StaticSiteGeneratorPlugin('main', paths),
+    new ExtractTextPlugin('/assets/bundle.css')
   ]
 };

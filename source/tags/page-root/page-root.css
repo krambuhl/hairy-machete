@@ -1,3 +1,4 @@
-.page-root {
-	background-color: red;
+body {
+	background-image: url('./images/bg-pattern.gif');
+	padding: 2em;
 }

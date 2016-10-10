@@ -1,0 +1,11 @@
+.heading {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.heading--h1 { font-size: 2em; }
+.heading--h2 { font-size: 1.6em; }
+.heading--h3 { font-size: 1.4em; }
+.heading--h4 { font-size: 1.3em; }
+.heading--h5 { font-size: 1.2em; }
+.heading--h6 { font-size: 1.1em; }

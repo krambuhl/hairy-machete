@@ -1,35 +1,45 @@
 import React from 'react';
+
+import reset from '../reset/reset.css';
 import styles from './page-root.css';
 
-const PageRoot__Head = ({ children }) => (
-	<head class="html__head">
+const Root__Wrapper = ({ title, children }) => (
+	<html>
+		{children}
+	</html>
+);
+
+const Root__Head = ({ title, children }) => (
+	<head>
 		<meta charset="utf-8" />
 		<title>{title}</title>
-		<link rel="stylesheet" href="" />
+		<link rel="stylesheet" href="/assets/bundle.css" />
 		{children}
 	</head>
 );
 
-const PageRoot__Foot = ({ children }) => (
-	<div className="html__foot">
-		<script src="/script" />
+const Root__Foot = ({ children }) => (
+	<div>
+		<script src="/assets/bundle.js" />
 		{children}
 	</div>
 );
 
-const PageRoot = ({ children }) => (
-	<html>
-	<PageRoot__Head />	
-	<body>
-		{children}
-		<PageRoot__Foot />	
-	</body>
-	</html>
+const PageRoot = ({ title, children }) => (
+	<Root__Wrapper>
+		<Root__Head title={title} />	
+		<body>
+			{children}
+			<Root__Foot />	
+		</body>
+	</Root__Wrapper>
 );
+
 
 export default PageRoot;
 export {
 	PageRoot,
-	PageRoot__Head,
-	PageRoot__Foot
+	Root__Wrapper,
+	Root__Head,
+	Root__Foot
 }
