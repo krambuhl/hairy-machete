@@ -31,6 +31,7 @@
     "postcss-cssnext": "^2.8.0",
     "postcss-discard-empty": "^2.1.0",
     "postcss-import": "^8.1.2",
+    "postcss-loader": "^0.13.0",
     "raw-loader": "^0.5.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
