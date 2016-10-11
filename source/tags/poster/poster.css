@@ -1,14 +1,45 @@
+@import "../variables";
+
 .poster {
 	display: inline-block;
 	vertical-align: middle;
 
 	margin-right: 1em;
+	margin-bottom: 1em;
+
 	padding: 1em;
 
-	background-color: #eee;
+	background-color: white;
 	border-radius: 4px;
+	box-shadow: #000.3 0 0 1em;
+	
+	& > * + * {
+		margin-top: 1em;	
+	}
+}
+
+.poster__heading {
+	color: #000;
 }
 
 .poster__img {
 	border-radius: 2px;
+}
+
+.poster--default {
+
+}
+
+.poster--small {
+	& .poster__img { height: 320px; }
+}
+
+.poster--link {
+	text-decoration: none;
+	color: #000;
+	
+	&:--enter {
+		background-color: #eee;
+		text-decoration: none;		
+	}
 }

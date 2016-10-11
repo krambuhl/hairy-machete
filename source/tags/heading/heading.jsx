@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './heading.css';
 
-const Heading = ({ tagName = 'h3', children }) => {
+const Heading = ({
+	tagName = 'h3',
+	className,
+	children
+}) => {
 	const Tag = tagName
 	let mod = 'heading--';
+	
 	switch(tagName) {
 		case 'h1': mod += 'h1'; break;
 		case 'h2': mod += 'h2'; break;
@@ -13,9 +18,8 @@ const Heading = ({ tagName = 'h3', children }) => {
 		case 'h6': mod += 'h6'; break;
 	}
 
-	
 	return (
-		<Tag className={'heading ' + mod}>{children}</Tag>
+		<Tag className={['heading', mod, className].join(' ')}>{children}</Tag>
 	)
 };
 

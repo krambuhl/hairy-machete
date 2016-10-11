@@ -1,6 +1,4 @@
 import React from 'react';
-
-import reset from '../reset/reset.css';
 import styles from './page-root.css';
 
 const Root__Wrapper = ({ title, children }) => (
