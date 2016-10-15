@@ -34,6 +34,10 @@ const Poster = ({
 	);
 };
 
+Poster.propTypes = {
+	title: React.PropTypes.string
+}
+
 export default Poster;
 export {
 	Poster

@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './page-root.css';
 
-const Root__Wrapper = ({ title, children }) => (
+
+export const PageRoot__Wrapper = ({ children }) => (
 	<html>
 		{children}
 	</html>
 );
 
-const Root__Head = ({ title, children }) => (
+export const PageRoot__Head = ({ title, children }) => (
 	<head>
 		<meta charset="utf-8" />
 		<title>{title}</title>
@@ -16,28 +17,19 @@ const Root__Head = ({ title, children }) => (
 	</head>
 );
 
-const Root__Foot = ({ children }) => (
-	<div>
-		<script src="/assets/bundle.js" />
+export const PageRoot__Body = ({ children }) => (
+	<body>
 		{children}
-	</div>
+		<script src="/assets/bundle.js" />
+	</body>
 );
 
-const PageRoot = ({ title, children }) => (
-	<Root__Wrapper>
-		<Root__Head title={title} />	
-		<body>
-			{children}
-			<Root__Foot />	
-		</body>
-	</Root__Wrapper>
+export const PageRoot = ({ title, children }) => (
+	<PageRoot__Wrapper>
+		<PageRoot__Head title={title} />	
+		<PageRoot__Body>{children}</PageRoot__Body>
+	</PageRoot__Wrapper>
 );
 
 
 export default PageRoot;
-export {
-	PageRoot,
-	Root__Wrapper,
-	Root__Head,
-	Root__Foot
-}
