@@ -1,25 +1,31 @@
 const webpack = require('webpack');
 
-const baseBuild = require('./webpack.pages.config');
-const build = Object.assign({}, baseBuild);
+const baseBuild = require('./webpack.config');
+const build = Array.prototype.slice(baseBuild);
 
 const cssnano = require('cssnano');
 
 // production specific configuration
-build.devtool = 'source-map';
+build.forEach((b, i) => {
+	build[i].devtool = 'source-map'
+});;
 
-build.module.loaders[0].query.presets.pop()
+build.forEach((b, i) => {
+	build[i].plugins.shift(
+	  new webpack.DefinePlugin({
+	    'process.env': {
+	      'NODE_ENV': JSON.stringify('production')
+	    }
+	  })
+	);
+})
 
-build.plugins = build.plugins.concat([
-  new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production')
-    }
-  })
-]);
-
-build.postcss = build.postcss.concat([
-	cssnano()
-]);
+build.forEach((b, i) => {
+	if (build[i].postcss !== undefined) {
+		build[i].postcss = build[i].postcss.concat([
+			cssnano()
+		]);
+	}
+})
 
 module.exports = build;

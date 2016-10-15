@@ -6,6 +6,7 @@
   "scripts": {
     "webpack-build": "webpack --progress",
     "build": "gulp build",
+    "production": "gulp production",
     "watch": "webpack-dev-server",
     "start": "http-server ./dist"
   },
@@ -21,8 +22,13 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "glob": "^7.1.1",
     "gulp": "github:gulpjs/gulp#4.0",
+    "html": "^1.0.0",
+    "html-loader": "^0.4.4",
     "http-server": "^0.9.0",
     "image-webpack-loader": "^2.0.0",
+    "js-beautify": "^1.6.4",
+    "json-loader": "^0.5.4",
+    "markdown-loader": "^0.1.7",
     "noop-loader": "^1.0.0",
     "postcss-color-alpha": "^1.0.3",
     "postcss-cssnext": "^2.8.0",

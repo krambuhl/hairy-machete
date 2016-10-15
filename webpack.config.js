@@ -44,7 +44,7 @@ const renderStyleguide = staticConfig({
 renderStyleguide.plugins.pop();
 renderStyleguide.module.loaders = [
   renderStyleguide.module.loaders[0],
-  renderStyleguide.module.loaders[2],
+  ...renderStyleguide.module.loaders.slice(2),
   { test: /\.css$/, loader: 'raw-loader!postcss-loader' }
 ];
 

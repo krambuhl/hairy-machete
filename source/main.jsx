@@ -3,7 +3,8 @@ import Dom from 'react-dom';
 
 import Heading from './tags/heading/heading.jsx';
 
-Dom.render(
-  <Heading>Hello World</Heading>,
-  document.getElementById('mount-point')
-);
+const mountPoint = document.getElementById('mount-point')
+
+if (mountPoint) {
+	Dom.render(<Heading>Hello World</Heading>, mountPoint);
+}

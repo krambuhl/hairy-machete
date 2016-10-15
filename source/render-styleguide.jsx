@@ -3,14 +3,31 @@ import Dom from 'react-dom/server';
 
 import StyleguideWrapper from './styleguide/wrapper.jsx';
 
+const requireOrFail = (path) => {
+	try {
+		return require(path);
+	} catch(e) {
+		return;
+	}
+}
+
 module.exports = function renderStyleguide(locals, callback) {
 	const name = locals.path.substr('styleguide/'.length)
 	const fname = name.substr(0, name.length - 5);
-	const path = './tags/' + fname + '/' + fname;
+	const basePath = './tags/' + fname + '/';
+	const path = basePath + fname;
 
-	// console.log('raw!' + path + '.css');
-	const Tag = require(path + '.jsx').default;
-	const style = require(path + '.css');
+	const style = requireOrFail(path + '.css')
+	const readme = requireOrFail(basePath + 'README.md');
+	const pkg = requireOrFail(basePath + 'package.json');
 
-  callback(null, Dom.renderToStaticMarkup(<StyleguideWrapper tag={Tag} style={style}>Hello</StyleguideWrapper>, locals));
+
+	const res = 
+		<StyleguideWrapper 
+			tag={require(path + '.jsx').default} 
+			style={requireOrFail(path + '.css')} 
+			readme={requireOrFail(basePath + 'README.md')}
+			pkg={requireOrFail(basePath + 'package.json')} />
+
+  callback(null, Dom.renderToStaticMarkup(res, locals));
 };
