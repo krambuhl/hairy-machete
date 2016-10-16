@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom/server';
 
-import PageRoot from './tags/page-root/page-root.jsx';
+import BasicPage from './tags/basic-page/basic-page.jsx';
 
 module.exports = function renderComponent(locals, callback) {
 	const path = locals.path.substr(0, locals.path.length - 5);
@@ -9,9 +9,9 @@ module.exports = function renderComponent(locals, callback) {
 	const Page = require(`./components/${name}/${name}.jsx`).default;
 
 	const RenderPage = (
-		<PageRoot title={name}>
+		<BasicPage title={name}>
 			<Page locals={locals} />
-		</PageRoot>
+		</BasicPage>
 	);
 
   callback(null, Dom.renderToStaticMarkup(RenderPage, locals));

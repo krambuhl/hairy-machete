@@ -2,12 +2,13 @@ import path from 'path';
 
 import React from 'react';
 
-import PageRoot from '../../tags/page-root/page-root.jsx';
+import { ComponentList } from '../index.jsx';
+import BasicPage from '../../tags/basic-page/basic-page.jsx';
 import Heading from '../../tags/heading/heading.jsx';
 
 export default ({ locals }) => (
-	<PageRoot title="Components">
+	<BasicPage title="Components">
 		<Heading tagName="h1">Components</Heading>
-		{locals.components.join('  –  ')}
-	</PageRoot>
+		<ComponentList baseUrl="/components" components={locals.components} />
+	</BasicPage>
 );

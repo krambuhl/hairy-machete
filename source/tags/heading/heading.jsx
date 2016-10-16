@@ -3,6 +3,7 @@ import styles from './heading.css';
 
 const Heading = ({
 	tagName = 'h3',
+	href,
 	className,
 	children
 }) => {

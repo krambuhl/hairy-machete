@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PageRoot from '../tags/page-root/page-root.jsx';
+import BasicPage from '../tags/basic-page/basic-page.jsx';
 import Heading from '../tags/heading/heading.jsx';
 
 const getName = name => 
@@ -21,18 +21,18 @@ export const ComponentList = ({ baseUrl, components }) => {
 }
 
 export default ({ locals }) => (
-	<PageRoot title="Hello World">
+	<BasicPage title="Hello World">
 		<Heading tagName="h1">Hello World</Heading>
 		
-		<Heading tagName="h2">Components</Heading>
+		<Heading tagName="h2"><a href="/components">Components</a></Heading>
 		<ComponentList baseUrl="/components" components={locals.components} />
 		
-		<Heading tagName="h2">Styleguide</Heading>
+		<Heading tagName="h2"><a href="/styleguide">Styleguide</a></Heading>
 
 		<Heading tagName="h3">Components</Heading>
 		<ComponentList baseUrl="/styleguide/components" components={locals.components} />
 		
 		<Heading tagName="h3">Tags</Heading>
 		<ComponentList baseUrl="/styleguide/tags" components={locals.tags} />
-	</PageRoot>
+	</BasicPage>
 )

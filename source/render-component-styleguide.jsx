@@ -20,7 +20,7 @@ module.exports = function renderStyleguide(locals, callback) {
 	const path = basePath + name;
 
 	const res = 
-		<StyleguideWrapper 
+		<StyleguideWrapper
 			name={name}
 			path={path}
 			tag={require(path + '.jsx').default} 

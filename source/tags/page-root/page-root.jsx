@@ -17,17 +17,17 @@ export const PageRoot__Head = ({ title, children }) => (
 	</head>
 );
 
-export const PageRoot__Body = ({ children }) => (
-	<body>
+export const PageRoot__Body = ({ className, children }) => (
+	<body className={className}>
 		{children}
 		<script src="/assets/bundle.js" />
 	</body>
 );
 
-export const PageRoot = ({ title, children }) => (
+export const PageRoot = ({ title, bodyClass = "", children }) => (
 	<PageRoot__Wrapper>
 		<PageRoot__Head title={title} />	
-		<PageRoot__Body>{children}</PageRoot__Body>
+		<PageRoot__Body className={bodyClass}>{children}</PageRoot__Body>
 	</PageRoot__Wrapper>
 );
 
