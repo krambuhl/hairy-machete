@@ -8,17 +8,17 @@ const cssnano = require('cssnano');
 // production specific configuration
 build.forEach((b, i) => {
 	build[i].devtool = 'source-map'
-});;
+});
 
 build.forEach((b, i) => {
-	build[i].plugins.shift(
+	build[i].plugins.unshift(
 	  new webpack.DefinePlugin({
 	    'process.env': {
 	      'NODE_ENV': JSON.stringify('production')
 	    }
 	  })
 	);
-})
+});
 
 build.forEach((b, i) => {
 	if (build[i].postcss !== undefined) {
@@ -26,6 +26,6 @@ build.forEach((b, i) => {
 			cssnano()
 		]);
 	}
-})
+});
 
 module.exports = build;

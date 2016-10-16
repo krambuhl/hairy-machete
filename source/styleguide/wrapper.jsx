@@ -7,57 +7,66 @@ import Heading from '../tags/heading/heading.jsx';
 import { prettyPrint } from 'html';
 
 export default ({ 
+	name = "Generic Component",
 	tag, 
 	style, 
 	readme, 
-	pkg = {}
+	pkg = {},
 }) => {
-	const { name, modifiers, demos } = pkg;
+	const { modifiers, examples } = pkg;
 	const Tag = tag;
 	let res;
 
-	if (demos) {
-		res = <Tag {...demos[0]} />
+	const niceTitle = 
+		name
+			.split('-')
+			.map(n => n.substr(0, 1).toUpperCase() + n.substr(1))
+			.join(' ')
+
+	if (examples) {
+		res = <Tag {...examples[0].data} />
 	} else {
 		res = <Tag />
 	}
-	
-	let output = [
-		<Heading tagName="h2">Example</Heading>,
-		<pre><code>{
-			prettyPrint(Dom.renderToStaticMarkup(res))
-		}</code></pre>
-	];
 
-	if (style) {
-		output = output.concat([
-			<Heading tagName="h2">CSS</Heading>,
-			<pre><code>{style}</code></pre>
-		]);
-	}
-
-	if (readme) {
-		output = output.concat([
-			<Heading tagName="h2">Readme</Heading>,
-			<div className="readme" dangerouslySetInnerHTML={{ __html: readme }}></div>
-		]);
-	}
-	
-	if (modifiers) {
-		output = output.concat([
-			<Heading tagName="h2">Modifiers</Heading>,
-			<ul>
-				{modifiers.map(m => <li>{name + '--' + m}</li>)}
-			</ul>
-		]);
-	}
 
 	return (
 		<PageRoot>
-			<Heading tagName="h1">Example</Heading>
-			<div className="component">{res}</div>
+			<Heading tagName="h1">{niceTitle}</Heading>
 
-			{output}
+			<div className={"styleguide__section styleguide__section--readme" + (readme ? " is-defined" : "")}>
+				<Heading tagName="h2">Readme</Heading>
+				{ 
+					readme 
+						? <div className="readme" dangerouslySetInnerHTML={{ __html: readme }}></div> 
+						: <div>No Readme</div>
+				}
+			</div>
+
+			<div className="styleguide__section styleguide__section--html is-defined">
+				<Heading tagName="h2">HTML</Heading>
+				<pre><code>
+					 {prettyPrint(Dom.renderToStaticMarkup(res)) }
+				</code></pre>
+			</div>
+
+			<div className={"styleguide__section styleguide__section--css" + (style ? " is-defined" : "")}>
+				<Heading tagName="h2">CSS</Heading>
+				{
+					style
+						? <pre><code>{style}</code></pre>
+						: <div>No CSS file defined</div>
+				}
+			</div>
+
+			{ modifiers ? (
+				<div className="styleguide__section styleguide__section--modifiers">
+					<Heading tagName="h2">Modifiers</Heading>
+					<ul>
+						{modifiers.map(m => <li>{name + '--' + m}</li>)}
+					</ul>
+				</div>
+			) : undefined }
 
 			<script src="/assets/styleguide.js"></script>
 		</PageRoot>

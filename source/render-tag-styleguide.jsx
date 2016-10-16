@@ -3,6 +3,8 @@ import Dom from 'react-dom/server';
 
 import StyleguideWrapper from './styleguide/wrapper.jsx';
 
+// this requires a file's contents, or returns 
+// nothing if the file doesn't exist
 const requireOrFail = (path) => {
 	try {
 		return require(path);
@@ -12,18 +14,15 @@ const requireOrFail = (path) => {
 }
 
 module.exports = function renderStyleguide(locals, callback) {
-	const name = locals.path.substr('styleguide/'.length)
-	const fname = name.substr(0, name.length - 5);
-	const basePath = './tags/' + fname + '/';
-	const path = basePath + fname;
-
-	const style = requireOrFail(path + '.css')
-	const readme = requireOrFail(basePath + 'README.md');
-	const pkg = requireOrFail(basePath + 'package.json');
-
+	const fileName = locals.path.substr('styleguide/tags/'.length)
+	const name = fileName.substr(0, fileName.length - 5);
+	const basePath = './tags/' + name + '/';
+	const path = basePath + name;
 
 	const res = 
 		<StyleguideWrapper 
+			name={name}
+			path={path}
 			tag={require(path + '.jsx').default} 
 			style={requireOrFail(path + '.css')} 
 			readme={requireOrFail(basePath + 'README.md')}

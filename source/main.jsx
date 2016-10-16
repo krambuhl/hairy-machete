@@ -8,3 +8,5 @@ const mountPoint = document.getElementById('mount-point')
 if (mountPoint) {
 	Dom.render(<Heading>Hello World</Heading>, mountPoint);
 }
+
+console.log('MAIN_BUNDLE!')

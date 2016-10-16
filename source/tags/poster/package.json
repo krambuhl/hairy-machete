@@ -1,12 +1,14 @@
 {
-	"name": "poster",
 	"modifiers": [
 		"small",
 		"link"
 	],
-	"demos": [{
-		"title": "Super Duper",
-		"src": "/assets/images/machete-d4b1456c.jpg",
-		"alt": "super"
+	"examples": [{
+		"name": "Default",
+		"data": {
+			"title": "Super Duper",
+			"src": "/assets/images/machete-d4b1456c.jpg",
+			"alt": "super"
+		}
 	}]
 }

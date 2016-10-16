@@ -17,7 +17,8 @@ module.exports = ({
   publicPath = './dist/',
   outputScript = 'bundle.js',
   outputStyle = 'bundle.css',
-  paths = []
+  paths = [],
+  locals = {}
 }) => ({
   devtool: 'eval',
   entry: {
@@ -66,7 +67,7 @@ module.exports = ({
     ]
   },
   plugins: [
-    new StaticSiteGeneratorPlugin('main', paths),
+    new StaticSiteGeneratorPlugin('main', paths, locals),
     new ExtractTextPlugin(outputStyle)
   ]
 });

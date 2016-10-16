@@ -1,0 +1,21 @@
+{
+	"examples": [{
+		"name": "Default",
+		"data": {
+			"children": "Hello World"
+		}
+	}, {
+		"name": "Level 1",
+		"data": {
+			"tagName": "h1",
+			"children": "Hello World"
+		}
+	},  {
+		"name": "Level 2 w/ className",
+		"data": {
+			"tagName": "h2",
+			"className": "extra-class",
+			"children": "Hello World"
+		}
+	}]
+}
