@@ -24,8 +24,8 @@ export default ({ locals }) => (
 	<BasicPage title="Hello World">
 		<Heading tagName="h1">Hello World</Heading>
 		
-		<Heading tagName="h2"><a href="/components">Components</a></Heading>
-		<ComponentList baseUrl="/components" components={locals.components} />
+		<Heading tagName="h2">Pages</Heading>
+		<p>No Pages</p>
 		
 		<Heading tagName="h2"><a href="/styleguide">Styleguide</a></Heading>
 

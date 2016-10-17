@@ -22,6 +22,7 @@ module.exports = ({
     libraryTarget: 'umd'
   },
   publicPath: './dist/',
+  postcss: require('./postcss-pack.js'),
   module: {
     loaders: [
       {

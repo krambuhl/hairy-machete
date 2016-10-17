@@ -5,11 +5,6 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
-const cssnext = require('postcss-cssnext');
-const colorAlpha = require('postcss-color-alpha');
-const cssimport = require('postcss-import');
-const discardEmpty = require('postcss-discard-empty');
-
 module.exports = ({
   devtool = 'eval',
   entry = '.js',
@@ -30,14 +25,7 @@ module.exports = ({
     libraryTarget: 'umd'
   },
   publicPath: './dist/',
-  postcss: [
-    cssimport(), // for importing global variables/custom-selectors
-    cssnext({
-      warnForDuplicates: false
-    }),
-    colorAlpha(),
-    discardEmpty()
-  ],
+  postcss: require('./postcss-pack.js'),
   module: {
     loaders: [
       {
