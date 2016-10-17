@@ -14,9 +14,11 @@ const requireOrFail = (path) => {
 }
 
 module.exports = function renderStyleguide(locals, callback) {
-	const fileName = locals.path.substr('styleguide/components/'.length)
-	const name = fileName.substr(0, fileName.length - 5);
-	const basePath = './components/' + name + '/';
+	const fileName = locals.path.substr('styleguide/'.length)
+	const type = fileName.split('/')[0];
+	const first = fileName.substr(type.length + 1);
+	const name = first.substr(0, first.length - 5);
+	const basePath = `./${type}/${name}/`;
 	const path = basePath + name;
 
 	const res = 

@@ -20,59 +20,48 @@ const getName = page => {
 const components = glob.sync('./source/components/**/*.jsx').map(getName);
 const tags = glob.sync('./source/tags/**/*.jsx').map(getName);
 
-const renderPages = staticConfig({
-  entry: './source/render-page.jsx',
+const prefix = pre => str => pre + str;
+const styleguides = 
+  tags.map(prefix('tags/')).concat(components.map(prefix('components/')))
+
+const baseOutput = config => Object.assign({
   outputPath: path.resolve(__dirname, 'dist'),
-  outputScript: '/tmp/render-pages.js',
-  outputStyle: '/tmp/render-pages.css',
+}, config);
+
+const renderPages = staticConfig(baseOutput({
+  entry: './source/render-page.jsx',
   locals: { components, tags },
   paths: glob.sync('./source/pages/**/*.jsx')
     .map(getDeepName('source/pages'))
     .map(page => `${page}.html`),
-});
+}));
 
-const renderComponents = staticConfig({
+const renderComponents = staticConfig(baseOutput({
   entry: './source/render-component.jsx',
-  outputPath: path.resolve(__dirname, 'dist'),
-  outputScript: '/tmp/render-components.js',
-  outputStyle: '/assets/bundle.css',
   paths: components.map(page => `components/${page}.html`)
-});
+}));
 
-const renderTagStyleguide = styleguideConfig({
-  entry: './source/render-tag-styleguide.jsx',
-  outputPath: path.resolve(__dirname, 'dist'),
-  outputScript: '/tmp/render-tag-styleguide.js',
-  paths: tags.map(page => `styleguide/tags/${page}.html`)
-});
+const renderStyleguide = styleguideConfig(baseOutput({
+  entry: './source/render-styleguide.jsx',
+  outputStyle: '/assets/bundle.css', 
+  paths: styleguides.map(page => `styleguide/${page}.html`)
+}));
 
-const renderComponentStyleguide = styleguideConfig({
-  entry: './source/render-component-styleguide.jsx',
-  outputPath: path.resolve(__dirname, 'dist'),
-  outputScript: '/tmp/render-component-styleguide.js',
-  paths: components.map(page => `styleguide/components/${page}.html`)
-});
-
-const browserBundle = browserConfig({
+const browserScript = browserConfig(baseOutput({
   entry: './source/main.jsx',
-  outputPath: path.resolve(__dirname, 'dist'),
-  outputScript: '/assets/bundle.js',
-  outputStyle: '/tmp/browser.css'
-});
+  outputScript: '/assets/bundle.js'
+}));
 
-const styleguideBundle = browserConfig({
+const styleguideBundle = browserConfig(baseOutput({
   entry: './source/styleguide.jsx',
-  outputPath: path.resolve(__dirname, 'dist'),
   outputScript: '/assets/styleguide.js',
   outputStyle: '/assets/styleguide.css'
-});
-
+}));
 
 module.exports = [
   renderPages,
   renderComponents,
-  renderComponentStyleguide,
-  renderTagStyleguide,
-	browserBundle,
+  renderStyleguide,
+	browserScript,
   styleguideBundle
 ];
