@@ -4,7 +4,6 @@ import Variation from './variation.jsx';
 import BasicPage from '../tags/basic-page/basic-page.jsx';
 import Heading from '../tags/heading/heading.jsx';
 
-
 export default ({
 	tag,
 	name,

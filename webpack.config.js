@@ -36,20 +36,9 @@ const renderPages = staticConfig(baseOutput({
     .map(page => `${page}.html`),
 }));
 
-const renderComponents = staticConfig(baseOutput({
-  entry: './source/render-component.jsx',
-  paths: components.map(page => `components/${page}.html`)
-}));
-
 const renderStyleguide = styleguideConfig(baseOutput({
   entry: './source/render-styleguide.jsx',
-  outputStyle: '/assets/bundle.css', 
   paths: styleguides.map(page => `styleguide/${page}.html`)
-}));
-
-const browserScript = browserConfig(baseOutput({
-  entry: './source/main.jsx',
-  outputScript: '/assets/bundle.js'
 }));
 
 const styleguideBundle = browserConfig(baseOutput({
@@ -58,10 +47,20 @@ const styleguideBundle = browserConfig(baseOutput({
   outputStyle: '/assets/styleguide.css'
 }));
 
+const browserScript = browserConfig(baseOutput({
+  entry: './source/main.jsx',
+  outputScript: '/assets/bundle.js'
+}));
+
+const browserStyle = browserConfig(baseOutput({
+  entry: './source/style.jsx',
+  outputStyle: '/assets/bundle.css'
+}));
+
 module.exports = [
-  renderPages,
-  renderComponents,
+  browserScript,
+  browserStyle,
   renderStyleguide,
-	browserScript,
-  styleguideBundle
+  styleguideBundle,
+  renderPages
 ];
