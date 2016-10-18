@@ -76,7 +76,7 @@ export const StyleguideExample = ({
 	const reactExample =
 		data.children
 			? `<${tagName} ${json2htmlAttrs(data)}>${data.children}</${tagName}>`
-			: `<${tagName} ${json2htmlAttrs(data)}></${tagName}>`
+			: `<${tagName} ${json2htmlAttrs(data)} />`
 	
 	return (
 		<div className="styleguide__example">
