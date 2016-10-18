@@ -1,10 +1,14 @@
 const path = require('path');
 const glob = require('glob');
+const fs = require('fs');
+const fileExists = require('file-exists');
 
 const staticConfig = require('./build/webpack.static.js');
 const styleguideConfig = require('./build/webpack.styleguide.js');
 const browserConfig = require('./build/webpack.browser.js');
 
+
+// get path of file relative to source directory
 const getDeepName = source => blob => {
   const blobPath = path.resolve(__dirname, blob);
   const rootPath = path.resolve(__dirname, source);
@@ -12,22 +16,40 @@ const getDeepName = source => blob => {
   return name.substr(0, name.length - path.extname(blob).length);
 };
 
-const getName = page => {
-  const ext = path.extname(page);
-  return path.basename(page, ext);
-};
 
-const components = glob.sync('./source/components/**/*.jsx').map(getName);
-const tags = glob.sync('./source/tags/**/*.jsx').map(getName);
+// helpers for finding files for rendering
+const getDirectories = (src) => 
+  fs.readdirSync(src)
+    .filter(file => fs.statSync(path.join(src, file)).isDirectory());
 
+const componentExists = (baseSrc, name) => 
+  fileExists(path.resolve(baseSrc, name, name + '.jsx'));
+
+
+// create lists of components with a coresponding jsx file
+const components =
+  getDirectories('./source/components')
+    .filter(name => componentExists('./source/components', name));
+
+const tags = 
+  getDirectories('./source/tags')
+    .filter(name => componentExists('./source/tags', name));
+
+
+// concatinate both lists together for the styleguide
 const prefix = pre => str => pre + str;
 const styleguides = 
-  tags.map(prefix('tags/')).concat(components.map(prefix('components/')))
+  tags.map(prefix('tags/'))
+    .concat(components.map(prefix('components/')))
 
+
+// a base objects used in every configuration
 const baseOutput = config => Object.assign({
   outputPath: path.resolve(__dirname, 'dist'),
 }, config);
 
+
+// webpack configurations
 const renderPages = staticConfig(baseOutput({
   entry: './source/render-page.jsx',
   locals: { components, tags },
@@ -38,6 +60,7 @@ const renderPages = staticConfig(baseOutput({
 
 const renderStyleguide = styleguideConfig(baseOutput({
   entry: './source/render-styleguide.jsx',
+  locals: { components, tags },
   paths: styleguides.map(page => `styleguide/${page}.html`)
 }));
 
@@ -57,6 +80,8 @@ const browserStyle = browserConfig(baseOutput({
   outputStyle: '/assets/bundle.css'
 }));
 
+
+// output all webpack configurations to cli
 module.exports = [
   browserScript,
   browserStyle,

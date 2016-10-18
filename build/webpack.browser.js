@@ -5,21 +5,20 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = ({
-  devtool = 'eval',
+  devtool = 'source-map',
   entry = '.js',
   outputPath = path.resolve(__dirname, 'dist'),
   publicPath = './dist/',
   outputScript = '/tmp/bundle.js',
   outputStyle = '/tmp/bundle.css',
 }) => ({
-  devtool: 'source-map',
+  devtool: devtool,
   entry: {
     main: entry
   },
   output: {
     path: outputPath,
-    filename: outputScript,
-    libraryTarget: 'umd'
+    filename: outputScript
   },
   publicPath: './dist/',
   postcss: require('./postcss-pack.js'),

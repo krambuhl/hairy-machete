@@ -7,7 +7,7 @@ const Poster = ({
 	href,
 	src,
 	alt, 
-	type = "default",
+	type = 'default',
 	className,
 	children
 }) => {

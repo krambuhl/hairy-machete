@@ -1,5 +1,22 @@
 @import "reset-css/reset.css";
 
+* {
+	box-sizing: border-box;
+}
+
+html,
 body {
-	padding: 2em;
+	font-family: "Helvetica Neue", sans-serif;
+	line-height: 1.3em;
+}
+
+pre,
+code {
+	font-family: "PT Mono", mono;
+	font-size: 0.9em;
+	line-height: 1.4em;
+}
+
+pre {
+	overflow: scroll;
 }

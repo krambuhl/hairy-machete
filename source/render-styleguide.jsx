@@ -28,7 +28,8 @@ module.exports = function renderStyleguide(locals, callback) {
 			tag={require(path + '.jsx').default} 
 			style={requireOrFail(path + '.css')} 
 			readme={requireOrFail(basePath + 'README.md')}
-			pkg={requireOrFail(basePath + 'package.json')} />
+			examples={requireOrFail(basePath + 'examples.jsx')}
+			locals={locals} />
 
   callback(null, Dom.renderToStaticMarkup(res, locals));
 };

@@ -10,6 +10,7 @@ build.forEach((b, i) => {
 	build[i].devtool = 'source-map'
 });
 
+// add production flag to build environment
 build.forEach((b, i) => {
 	build[i].plugins.unshift(
 	  new webpack.DefinePlugin({
@@ -20,6 +21,7 @@ build.forEach((b, i) => {
 	);
 });
 
+// add css minification
 build.forEach((b, i) => {
 	if (build[i].postcss !== undefined) {
 		build[i].postcss = build[i].postcss.concat([

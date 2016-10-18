@@ -1,27 +1,12 @@
 import React from 'react';
 
-import BasicPage from '../tags/basic-page/basic-page.jsx';
+import PageRoot from '../tags/page-root/page-root.jsx';
 import Heading from '../tags/heading/heading.jsx';
 
-const getName = name => 
-	name
-		.split('-')
-		.map(n => n.substr(0, 1).toUpperCase() + n.substr(1))
-		.join(' ');
-
-export const ComponentList = ({ baseUrl, components }) => {
-	const Items = components.map(item => {
-		const name = getName(item);
-		return <li><a href={`${baseUrl}/${item}.html`}>{name}</a></li>
-	});
-
-	return <ul>
-		{Items}
-	</ul>
-}
+import { ComponentList } from '../styleguide/wrapper.jsx';
 
 export default ({ locals }) => (
-	<BasicPage title="Hello World">
+	<PageRoot title="Hello World">
 		<Heading tagName="h1">Hello World</Heading>
 		
 		<Heading tagName="h2">Pages</Heading>
@@ -34,5 +19,5 @@ export default ({ locals }) => (
 		
 		<Heading tagName="h3">Tags</Heading>
 		<ComponentList baseUrl="/styleguide/tags" components={locals.tags} />
-	</BasicPage>
+	</PageRoot>
 )

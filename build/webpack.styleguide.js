@@ -7,11 +7,12 @@ module.exports = ({
   publicPath = './dist/',
   outputScript = '/tmp/bundle.js',
   outputStyle = '/tmp/bundle.css',
-  paths = []
+  paths = [],
+  locals = {}
 }) => {
   const build = staticConfig({ 
     devtool, entry, outputPath, publicPath,
-    outputScript, outputStyle, paths
+    outputScript, outputStyle, paths, locals
   });
 
   build.plugins.pop();
