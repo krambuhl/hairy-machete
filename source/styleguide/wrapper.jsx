@@ -119,9 +119,6 @@ export default ({
 	examples,
 	locals = {}
 }) => {
-	const Tag = tag;
-	const res = examples ? <Tag {...examples[0].data} /> : <Tag />
-
 	const niceTitle = 
 		name
 			.split('-')
@@ -153,12 +150,6 @@ export default ({
 							{ examples.map(e => <StyleguideExample tag={tag} name={e.name} data={e.data} niceTitle={niceTitle} />) }
 						</div>
 						: undefined }
-
-				<StyleguideSection type="html" title="HTML" isDefined={true}>
-					<pre><code>
-						 { prettyPrint(Dom.renderToStaticMarkup(res)) }
-					</code></pre>
-				</StyleguideSection>
 				
 				<StyleguideSection type="css" title="CSS" isDefined={!!style}>
 					{ style
