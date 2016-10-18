@@ -78,13 +78,24 @@ export const StyleguideExample = ({
 			? `<${tagName} ${json2htmlAttrs(data)}>${data.children}</${tagName}>`
 			: `<${tagName} ${json2htmlAttrs(data)} />`
 	
+	const jsonInputBlock =
+		<div className="styleguide__example-section styleguide__example-section--json">
+			<Heading tagName="h4">JSON Input</Heading>
+			<pre><code>
+				{ JSON.stringify(data, null, 4) }
+			</code></pre>
+		</div>
+
 	return (
 		<div className="styleguide__example">
 			<Heading tagName="h3">{name}</Heading>
 			
-			<div className="styleguide__example-section styleguide__example-section--example">
-				<Heading tagName="h4">Example</Heading>
-				<Tag {...data} />
+
+			<div className="styleguide__example-section styleguide__example-section--react">
+				<Heading tagName="h4">JSX</Heading>
+				<pre><code>
+					{reactExample}
+				</code></pre>
 			</div>
 
 			<div className="styleguide__example-section styleguide__example-section--html">
@@ -94,19 +105,12 @@ export const StyleguideExample = ({
 				</code></pre>
 			</div>
 
-			<div className="styleguide__example-section styleguide__example-section--react">
-				<Heading tagName="h4">React JSX</Heading>
-				<pre><code>
-					{reactExample}
-				</code></pre>
+			<div className="styleguide__example-section styleguide__example-section--example">
+				<Heading tagName="h4">Demo</Heading>
+				<Tag {...data} />
 			</div>
 
-			<div className="styleguide__example-section styleguide__example-section--json">
-				<Heading tagName="h4">JSON Input</Heading>
-				<pre><code>
-					{ JSON.stringify(data, null, 4) }
-				</code></pre>
-			</div>
+			
 		</div>
 	);
 };
