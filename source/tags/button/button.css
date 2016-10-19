@@ -1,0 +1,33 @@
+@import "../variables/index.css";
+
+.button {
+	display: inline-block;
+	vertical-align: middle;
+	
+	padding: 1em 2em;
+	border: 2px solid black;
+	color: black;
+	cursor: pointer;
+
+	&:--enter {
+		background-color: black;
+		color: white;
+	}
+}
+
+button.button {
+	background-color: white
+}
+
+.button--link {
+	display: inline-block;
+}
+
+.button--cta {
+	border: 2px solid red;
+	color: red;
+
+	&:--enter {
+		background-color: red;
+	}
+}
