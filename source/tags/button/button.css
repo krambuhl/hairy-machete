@@ -5,9 +5,12 @@
 	vertical-align: middle;
 	
 	padding: 1em 2em;
+	cursor: pointer;
+}
+
+.button--default {
 	border: 2px solid black;
 	color: black;
-	cursor: pointer;
 
 	&:--enter {
 		background-color: black;
@@ -21,12 +24,13 @@ button.button {
 
 .button--link {
 	display: inline-block;
+	text-decoration: none;
 }
 
 .button--cta {
 	border: 2px solid red;
 	color: red;
-
+	
 	&:--enter {
 		background-color: red;
 	}
