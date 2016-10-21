@@ -15,6 +15,9 @@ module.exports = ({
   paths = [],
   locals = {}
 }) => ({
+  devServer: { 
+    stats: 'errors-only'
+  },
   devtool: 'eval',
   entry: {
     main: entry

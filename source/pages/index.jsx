@@ -13,7 +13,7 @@ export default ({ locals }) => (
 			<Rhythm size="large">
 				<Heading tagName="h1">Hello World</Heading>
 
-				<Rhythm size="small">			
+				<Rhythm size="small" deep="true">			
 					<Heading tagName="h2">Styleguide</Heading>
 
 					<Heading tagName="h3">Components</Heading>
