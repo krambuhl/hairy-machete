@@ -12,7 +12,7 @@ export const StyleguideSection = ({
 	children
 }) => (
 	<div className={"styleguide__section styleguide__section--" + type + (isDefined ? " is-defined" : "")}>
-		<Heading tagName="h2">{title}</Heading>
+		<Heading level="2">{title}</Heading>
 		{children}
 	</div>
 );
@@ -34,7 +34,7 @@ export default ({
 
 	return (
 		<StyleguidePage title={`${niceTitle} – Bandish Styleguide`} locals={locals}>
-			<Heading tagName="h1">{niceTitle}</Heading>
+			<Heading level="1">{niceTitle}</Heading>
 			
 			{ readme
 				? <StyleguideSection type="readme" title="Readme" isDefined={!!readme}>
@@ -44,7 +44,7 @@ export default ({
 
 			{ examples 
 				? <div className="styleguide__section styleguide__section--examples">
-						<Heading tagName="h2">Examples</Heading>
+						<Heading level="2">Examples</Heading>
 						{ examples.map(e => 
 								<StyleguideExample 
 									tag={tag} 

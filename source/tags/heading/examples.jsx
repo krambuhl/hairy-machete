@@ -1,19 +1,34 @@
 module.exports = [{
-	name: "Default",
+	name: 'Heading (default)',
 	data: {
-		children: "Hello World"
+		children: 'Hello World'
 	}
 }, {
-	name: "Level 1",
+	name: 'Heading (level)',
 	data: {
-		tagName: "h1",
-		children: "Hello World"
+		level: '1',
+		children: 'Hello World'
 	}
 },  {
-	name: "Level 2 w/ added class",
+	name: 'Heading (level/className)',
 	data: {
-		tagName: "h2",
-		className: "heading--underline",
-		children: "Hello World"
+		level: '2',
+		className: 'heading--underline',
+		children: 'Hello World'
+	}
+}, {
+	name: 'Heading (level/type)',
+	data: {
+		level: '4',
+		type: 'thin',
+		children: 'Hello World'
+	}
+}, {
+	name: 'Heading (level/type/tagName)',
+	data: {
+		tagName: 'div',
+		level: '4',
+		type: 'medium',
+		children: 'Hello World'
 	}
 }];

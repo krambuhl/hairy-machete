@@ -1,15 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import test from 'tape';
-
-test('<Button />', t => {
-	const button = shallow(<Button>Hello World</Button>);
-
-	t.plan(2);
-	test.equal(button.text(), 'Hello World')
-	test.equal(component.is('button'), true);
-});
-
 module.exports = [{
 	name: "Button (Default)",
 	example: <Button>Hello World</Button>,

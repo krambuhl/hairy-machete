@@ -2,25 +2,26 @@ import React from 'react';
 import styles from './heading.css';
 
 const Heading = ({
-	tagName = 'h3',
-	href,
-	className,
+	tagName,
+	type = 'default',
+	level,
+	className = '',
 	children
 }) => {
-	const Tag = tagName
-	let mod = 'heading--';
-	
-	switch(tagName) {
-		case 'h1': mod += 'h1'; break;
-		case 'h2': mod += 'h2'; break;
-		case 'h3': mod += 'h3'; break;
-		case 'h4': mod += 'h4'; break;
-		case 'h5': mod += 'h5'; break;
-		case 'h6': mod += 'h6'; break;
+	let Tag = tagName || 'h1';
+	let deLevel = level || 1;
+
+	if (level !== undefined && tagName === undefined) {
+		Tag	= 'h' + level;
+		deLevel = level
+	} else if (level === undefined && tagName !== undefined) {
+		Tag = tagName;
 	}
 
 	return (
-		<Tag className={['heading', mod, className].join(' ')}>{children}</Tag>
+		<Tag className={`heading heading--${type} heading--h${deLevel} ${className}`}>
+			{children}
+		</Tag>
 	)
 };
 

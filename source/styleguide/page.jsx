@@ -20,9 +20,9 @@ export default ({
 		</PageRoot__Head>
 		<PageRoot__Body className="page-styleguide">
 			<div className="sg-nav">
-				<Heading tagName="h2">Components</Heading>
+				<Heading level="2">Components</Heading>
 				<ComponentList baseUrl="/styleguide/components" components={locals.components} />
-				<Heading tagName="h2">Tags</Heading>
+				<Heading level="2">Tags</Heading>
 				<ComponentList baseUrl="/styleguide/tags" components={locals.tags} />
 			</div>
 

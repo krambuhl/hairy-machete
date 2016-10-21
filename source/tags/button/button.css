@@ -18,6 +18,16 @@
 	}
 }
 
+.button--cta {
+	border: 2px solid red;
+	color: red;
+
+	&:--enter {
+		background-color: red;
+		color: white;
+	}
+}
+
 button.button {
 	background-color: white
 }
@@ -25,13 +35,4 @@ button.button {
 .button--link {
 	display: inline-block;
 	text-decoration: none;
-}
-
-.button--cta {
-	border: 2px solid red;
-	color: red;
-	
-	&:--enter {
-		background-color: red;
-	}
 }

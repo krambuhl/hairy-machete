@@ -35,24 +35,24 @@ export default ({
 
 	return (
 		<div className="styleguide__example">
-			<Heading tagName="h3">{name}</Heading>
+			<Heading level="3">{name}</Heading>
 				
 			<div className="styleguide__example-section styleguide__example-section--react">
-				<Heading tagName="h4">JSX</Heading>
+				<Heading level="4">JSX</Heading>
 				<pre><code>
 					{reactExample}
 				</code></pre>
 			</div>
 
 			<div className="styleguide__example-section styleguide__example-section--html">
-				<Heading tagName="h4">HTML</Heading>
+				<Heading level="4">HTML</Heading>
 				<pre><code>
 					{ prettyPrint(Dom.renderToStaticMarkup(res)) }
 				</code></pre>
 			</div>
 
 			<div className="styleguide__example-section styleguide__example-section--example">
-				<Heading tagName="h4">Demo</Heading>
+				<Heading level="4">Demo</Heading>
 				<Tag {...data} />
 			</div>
 		</div>
