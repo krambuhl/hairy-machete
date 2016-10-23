@@ -4,7 +4,7 @@ const getName = name =>
 	name
 		.split('-')
 		.map(n => n.substr(0, 1).toUpperCase() + n.substr(1))
-		.join(' ');
+		.join('');
 
 export default ({ baseUrl, components }) => {
 	const Items = components.map(item => {

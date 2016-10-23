@@ -33,7 +33,7 @@ export default ({
 		name
 			.split('-')
 			.map(n => n.substr(0, 1).toUpperCase() + n.substr(1))
-			.join(' ');	
+			.join('');	
 
 	const tagName = niceTitle.split(' ').join('');
 
