@@ -7,13 +7,16 @@ export default ({
 	locals
 }) => (
 	<div className="sg-nav">
-		<div className="sg-nav__toggle">Menu</div>
+		<div className="sg-nav__toggle">Table of contents</div>
 		
 		<div className="sg-nav__container">
 			<Heading level="2">Components</Heading>
 			<ComponentList baseUrl="/styleguide/components" components={locals.components} />
+
 			<Heading level="2">Tags</Heading>
 			<ComponentList baseUrl="/styleguide/tags" components={locals.tags} />
 		</div>
+		
+		<div className="sg-nav__cover"></div>
 	</div>
 );

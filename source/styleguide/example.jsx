@@ -61,7 +61,8 @@ export default ({
 	const reactExample = buildReactExample(tagName, component.props, component.props.children);
 
 	return (
-		<div className="sg-test__example sg-example" id={slug}>
+		<div className="sg-test__example sg-example">
+			<a className="sg-expample__anchor" id={slug}></a>
 			<div className="sg-example__header">
 				<Heading level="3">{exampleName}</Heading>
 

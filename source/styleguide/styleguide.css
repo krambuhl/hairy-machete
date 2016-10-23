@@ -1,33 +1,18 @@
+.is-sg-nav-expanded {
+	overflow: hidden;
+}
+
 .sg-nav {
 	& a {
 		color: #000;
 	}
 
-	&:after {
-		content: '\0020';
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-
-		background-color: #000.8;
-		
-		transition-timing-function: ease;
-		transition-property: opacity, transform;
-		transition-duration: 0.3s, 0s, 0s;
-		transition-delay: 0s, 0.3s, 0.3s;
-
-		opacity: 0;
-		transform: translate3d(0, -100%, 0);
-	}
-
-	&:hover,
 	&.is-expanded {
-		&:after {
+		& .sg-nav__cover {
 			transform: translate3d(0, 0, 0);
 			opacity: 1;
 			transition-delay: 0s;
+			pointer-events: auto;
 		}
 
 		& .sg-nav__toggle {
@@ -45,16 +30,21 @@
 	position: fixed;
 	top: 0;
 	right: 0;
+	left: 0;
 	z-index: 100;
 
-	padding: 1em 1.5em;
+	padding: 1em;
 	background-color: #000.85;
 	color: white;
 
 	text-decoration: none;
 	cursor: pointer;
 
-	transition: transform 0.3s ease;
+	transition: transform 0.45s ease;
+
+	@media (width >= 960px) {
+		padding: 1em 2em;
+	}
 }
 
 .sg-nav__container {
@@ -63,15 +53,19 @@
 	right: 0;
 	left: 0;
 	z-index: 99;
+	max-height: 100vh;
+	overflow: scroll;
 
 	padding: 1em;
+	padding-top: 4em;
 	font-size: 1em;
 	line-height: 1.7em;
 
 	background-color: #eee;
 
 	transform: translate3d(0, -100%, 0);
-	transition: transform 0.3s ease;
+	transition: transform 0.35s;
+	transition-timing-function: ease-in-out;
 
 	& * + .heading {
 		margin-top: 1em;
@@ -83,10 +77,33 @@
 
 	@media (width >= 960px) {
 		padding: 2em;
+		padding-top: 5em;
 	}
 }
 
+.sg-nav__cover {
+	content: '\0020';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-color: #000.8;
+	
+	transition-timing-function: ease;
+	transition-property: opacity, transform;
+	transition-duration: 0.45s, 0s, 0s;
+	transition-delay: 0s, 0.45s, 0.45s;
+
+	opacity: 0;
+	pointer-events: none;
+	transform: translate3d(0, -100%, 0);
+}
+
+
 .sg-styleguide {
+	margin-top: 3em;
 	overflow: hidden;
 
 	& > .heading { 
@@ -104,16 +121,7 @@
 		}
 	}	
 }
-/* 
-.styleguide__section,
-.styleguide__example,
-.styleguide__example-demo,
-.styleguide__example-data {
-	& > * + * {
-		margin-top: 1em;
-	}
-}
-*/
+
 
 .sg-section {
 	border-top: 1px solid #eee;
@@ -153,11 +161,9 @@
 .sg-test__example {
 	padding: 1em;
 	border-top: 1px solid #eee;
-	/* padding-top: 0; */
 
 	@media (width >= 960px) {
 		padding: 2em;
-		/* padding-top: 0; */
 	}
 }
 
@@ -165,8 +171,14 @@
 
 }
 
-.sg-example__header {
+.sg-expample__anchor {
+  display: block;
+  position: relative;
+  top: -4.2em;
+  visibility: hidden;
+}
 
+.sg-example__header {
 	& .heading {
 		margin-bottom: 1em;
 	}
@@ -175,6 +187,11 @@
 .sg-example__tabs {
 	overflow: hidden;
 	border-bottom: none;
+	font-size: 0.8em;
+
+	@media (width >= 640px) {
+		font-size: 1em;
+	}
 }
 
 .sg-example__tabs-item {
@@ -185,20 +202,22 @@
 
 	& a {
 		display: block;
-		padding: 1em;
+		padding: 1em 0;
 
 		background-color: #eee;
 		color: #222;
+		font-weight: bold;
 
 		text-decoration: none;
 		
 		&:hover {
-			background-color: #ccc;
+			background-color: color(#eee blend(#ddd 50%));
 		}
 	}
 
 	&.is-active a {
-		background-color: #ccc;
+		background-color: #ddd;
+		font-weight: bold;
 	}
 }
 
@@ -207,6 +226,7 @@
 	border: 1px solid #ccc;
 	
 	padding: 1em;
+	overflow: scroll;
 
 	@media (width >= 960px) {
 		padding: 2em;
