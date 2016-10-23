@@ -1,13 +1,14 @@
 import React from 'react';
 import Dom from 'react-dom/server';
 
-import StyleguideWrapper from './styleguide/template.jsx';
+import Styleguide from './styleguide/template.jsx';
 
 // this requires a file's contents, or returns 
 // nothing if the file doesn't exist
 const requireOrFail = (path) => {
 	try {
-		return require(path);
+		const module = require(path);
+		return module.default || module;
 	} catch(e) {
 		return;
 	}
@@ -22,13 +23,14 @@ module.exports = function renderStyleguide(locals, callback) {
 	const path = basePath + name;
 
 	const res = 
-		<StyleguideWrapper
+		<Styleguide
 			name={name}
 			path={path}
 			tag={require(path + '.jsx').default} 
 			style={requireOrFail(path + '.css')} 
 			readme={requireOrFail(basePath + 'README.md')}
 			examples={requireOrFail(basePath + 'examples.jsx')}
+			tests={requireOrFail(path + '.test.jsx')}
 			locals={locals} />
 
   callback(null, Dom.renderToStaticMarkup(res, locals));

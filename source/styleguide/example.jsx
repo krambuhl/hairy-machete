@@ -1,6 +1,6 @@
 import React from 'react';
 import Dom from 'react-dom/server';	
-import { prettyPrint } from 'html';
+import { pd } from 'pretty-data';
 
 import Heading from '../tags/heading/heading.jsx';
 
@@ -10,51 +10,97 @@ const json2htmlAttrs = obj =>
 		.map(key => `${key}="${obj[key]}"`)
 		.join(' ');
 
+const getChildren = child => {
+	if (Array.isArray(child))
+		return child
+			.map(c => buildReactExample(c.type, c.props, c.props.children))
+			.join('');
 
-const buildReactExample = (tagName, attrs, children) =>
-	children && attrs
-		? `<${tagName} ${attrs}>${children}</${tagName}>`
-		: children && !attrs
-			? `<${tagName}>${children}</${tagName}>`
-			: `<${tagName} ${attrs} />`
+	return child;
+}
 
+const buildReactExample = (tagName, props, children) => {
+	const attrs = json2htmlAttrs(props);
 
+	if (children && attrs)
+		return `<${tagName} ${attrs}>${getChildren(children)}</${tagName}>`;
+	else if (children && !attrs)
+		return `<${tagName}>${getChildren(children)}</${tagName}>`;
+	else
+		return `<${tagName} ${attrs} />`;
+}
+
+const filterProps = props => {
+	const copy = Object.assign({}, props);
+
+	if (Array.isArray(copy.children)) {
+		copy.children = [ '...' ]
+	}
+
+	return copy;
+}
+
+const ExampleSection = ({
+	slug,
+	title,
+	type,
+	children,
+	isActive = false
+}) => (
+	<div className={`sg-example__section sg-example__section--${type} ${isActive ? 'is-active' : ''}`}>
+		{children}
+	</div>
+);
 
 export default ({
-	tag,
-	niceTitle,
-	name,
-	data
+	slug,
+	tagName,
+	exampleName,
+	component
 }) => {
-	const Tag = tag;
-	const res = data ? <Tag {...data} /> : <Tag />
-
-	const tagName = niceTitle.split(' ').join('');
-	const attrs = json2htmlAttrs(data);
-	const reactExample = buildReactExample(tagName, attrs, data.children)
+	const reactExample = buildReactExample(tagName, component.props, component.props.children);
 
 	return (
-		<div className="styleguide__example">
-			<Heading level="3">{name}</Heading>
+		<div className="sg-test__example sg-example" id={slug}>
+			<div className="sg-example__header">
+				<Heading level="3">{exampleName}</Heading>
+
+				<ul className="sg-example__tabs">
+					<li className="sg-example__tabs-item is-active"><a href={'#' + slug + '/example'}>Example</a></li>
+					<li className="sg-example__tabs-item"><a href={'#' + slug + '/react'}>React</a></li>
+					<li className="sg-example__tabs-item"><a href={'#' + slug + '/html'}>HTML</a></li>
+					<li className="sg-example__tabs-item"><a href={'#' + slug + '/json'}>JSON</a></li>
+				</ul>
+			</div>
 				
-			<div className="styleguide__example-section styleguide__example-section--react">
-				<Heading level="4">JSX</Heading>
-				<pre><code>
-					{reactExample}
-				</code></pre>
-			</div>
+			<ExampleSection title="Example" type="example" slug={slug} isActive="true">				
+				<div>
+					{component}
+				</div>
 
-			<div className="styleguide__example-section styleguide__example-section--html">
-				<Heading level="4">HTML</Heading>
-				<pre><code>
-					{ prettyPrint(Dom.renderToStaticMarkup(res)) }
-				</code></pre>
-			</div>
+				<script 
+					id={slug + '-data'} 
+					type="text/json" 
+					dangerouslySetInnerHTML={{ __html:  JSON.stringify(component.props) }} />
+			</ExampleSection>
 
-			<div className="styleguide__example-section styleguide__example-section--example">
-				<Heading level="4">Demo</Heading>
-				<Tag {...data} />
-			</div>
+			<ExampleSection title="React" type="react" slug={slug}>
+				<pre><code>
+					{ pd.xml(reactExample) }
+				</code></pre>
+			</ExampleSection>
+
+			<ExampleSection title="HTML" type="html" slug={slug}>
+				<pre><code>
+					{ pd.xml(Dom.renderToStaticMarkup(component)) }
+				</code></pre>
+			</ExampleSection>
+
+			<ExampleSection title="JSON" type="json" slug={slug}>
+				<pre><code>
+					{ JSON.stringify(filterProps(component.props), null, 2) }
+				</code></pre>
+			</ExampleSection>
 		</div>
 	);
 };

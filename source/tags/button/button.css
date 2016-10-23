@@ -10,6 +10,7 @@
 
 .button--default {
 	border: 2px solid black;
+	background-color: #000.1;
 	color: black;
 
 	&:--enter {
@@ -20,16 +21,13 @@
 
 .button--cta {
 	border: 2px solid red;
+	background-color: #f00.1;
 	color: red;
 
 	&:--enter {
 		background-color: red;
 		color: white;
 	}
-}
-
-button.button {
-	background-color: white
 }
 
 .button--link {

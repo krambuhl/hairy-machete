@@ -1,9 +1,12 @@
 import React from 'react';
-
-import Heading from '../tags/heading/heading.jsx';
+import slug from 'slug';
 
 import StyleguidePage from './page.jsx';
 import StyleguideExample from './example.jsx';
+
+import Heading from '../tags/heading/heading.jsx';
+
+slug.charmap['/'] = '-';
 
 export const StyleguideSection = ({
 	type,
@@ -11,12 +14,11 @@ export const StyleguideSection = ({
 	title,
 	children
 }) => (
-	<div className={"styleguide__section styleguide__section--" + type + (isDefined ? " is-defined" : "")}>
+	<div className={"sg-section sg-section--" + type + (isDefined ? " is-defined" : "")}>
 		<Heading level="2">{title}</Heading>
 		{children}
 	</div>
 );
-
 
 export default ({ 
 	name = "Generic Component",
@@ -24,13 +26,18 @@ export default ({
 	style, 
 	readme,   
 	examples,
-	locals = {}
+	locals = {},
+	tests
 }) => {
 	const niceTitle = 
 		name
 			.split('-')
 			.map(n => n.substr(0, 1).toUpperCase() + n.substr(1))
-			.join(' ');
+			.join(' ');	
+
+	const tagName = niceTitle.split(' ').join('');
+
+	const slugy = name => slug(name);
 
 	return (
 		<StyleguidePage title={`${niceTitle} – Bandish Styleguide`} locals={locals}>
@@ -41,16 +48,28 @@ export default ({
 					 	<div className="readme" dangerouslySetInnerHTML={{ __html: readme }}></div> 
 					</StyleguideSection>
 				: undefined }
-
-			{ examples 
-				? <div className="styleguide__section styleguide__section--examples">
-						<Heading level="2">Examples</Heading>
-						{ examples.map(e => 
+	
+			{ tests	
+				? <div className="sg-section sg-section--tests sg-test">
+						<div className="sg-test__header">
+							<Heading level="2">Tests</Heading>
+							
+							<div className="sg-test__selector">
+								{ tests.map(e => 
+										<div><a
+											href={'#' + slug(e.name)} 
+											key={slug(e.name)} 
+											value={slug(e.name)}>{e.name}</a></div>) }
+							</div>
+						</div>
+							
+						{ tests.map(e =>
 								<StyleguideExample 
-									tag={tag} 
-									name={e.name} 
-									data={e.data} 
-									niceTitle={niceTitle} />) }
+									key={slug(e.name)}
+									slug={slug(e.name)}
+									tagName={tagName} 
+									exampleName={e.name}
+									component={e.component} />) }
 					</div>
 				: undefined }
 		</StyleguidePage>

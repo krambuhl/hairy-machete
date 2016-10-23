@@ -10,7 +10,7 @@ export default ({ baseUrl, components }) => {
 	const Items = components.map(item => {
 		const name = getName(item);
 		return <li key={name} className="sg-nav__component-item">
-			<a href={`${baseUrl}/${item}.html`}>{name}</a>
+			<a href={`${baseUrl}/${item}.html#content`}>{name}</a>
 		</li>
 	});
 

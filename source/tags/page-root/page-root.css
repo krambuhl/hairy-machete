@@ -18,5 +18,10 @@ code {
 }
 
 pre {
-	overflow: scroll;
+	/* overflow: scroll; */
+}
+
+button {
+	background-color: transparent;
+	font-size: 1em;
 }

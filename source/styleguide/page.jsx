@@ -8,6 +8,7 @@ import {
 } from '../tags/page-root/page-root.jsx';
 
 import ComponentList from './component-list.jsx';
+import Nav from './nav.jsx';
 
 export default ({
 	title,
@@ -19,14 +20,9 @@ export default ({
 			<link rel="stylesheet" href="/assets/styleguide.css" />
 		</PageRoot__Head>
 		<PageRoot__Body className="page-styleguide">
-			<div className="sg-nav">
-				<Heading level="2">Components</Heading>
-				<ComponentList baseUrl="/styleguide/components" components={locals.components} />
-				<Heading level="2">Tags</Heading>
-				<ComponentList baseUrl="/styleguide/tags" components={locals.tags} />
-			</div>
+			<Nav locals={locals} />
 
-			<div className="styleguide">
+			<div className="sg-styleguide" id="content">
 				{children}
 			</div>
 			<script src="/assets/styleguide.js"></script>
