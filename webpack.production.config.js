@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 
-const baseBuild = require('./webpack.config');
-const build = Array.prototype.slice(baseBuild);
+let build = require('./webpack.config');
 
 const cssnano = require('cssnano');
 
