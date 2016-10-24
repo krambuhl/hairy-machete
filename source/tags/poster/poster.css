@@ -1,4 +1,4 @@
-@import "../variables/index.css";
+@import "../../variables/index.css";
 
 .poster {
 	display: inline-block;
@@ -6,9 +6,9 @@
 	
 	padding: 1em;
 
-	background-color: white;
+	background-color: #eee.5;
 	border-radius: 4px;
-	box-shadow: #000.3 0 0 1em;
+	box-shadow: #000.2 0 0 1em;
 	
 	& > * + * {
 		margin-top: 1em;	
@@ -34,9 +34,13 @@
 .poster--link {
 	text-decoration: none;
 	color: #000;
+
+	transition: 0.3s ease;
+	transition-property: background-color, box-shadow;
 	
 	&:--enter {
-		background-color: #eee;
-		text-decoration: none;		
+		background-color: #fff;
+		text-decoration: none;	
+		box-shadow: #000.5 0 10px 2em;	
 	}
 }

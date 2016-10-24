@@ -7,7 +7,10 @@ export default ({
 	locals
 }) => (
 	<div className="sg-nav">
-		<div className="sg-nav__toggle">Table of contents</div>
+		<a href="#/" className="sg-nav__toggle">
+			<span>Table of Contents</span>
+			<span>Close</span>
+		</a>
 		
 		<div className="sg-nav__container">
 			<Heading level="2">Tags</Heading>

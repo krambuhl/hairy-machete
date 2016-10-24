@@ -1,24 +1,13 @@
 import React from 'react';
 import slug from 'slug';
 
-import StyleguidePage from './page.jsx';
+import StyleguideWrapper from './wrapper.jsx';
 import StyleguideExample from './example.jsx';
 
 import Heading from '../tags/heading/heading.jsx';
+import Rhythm from '../tags/rhythm/rhythm.jsx';
 
 slug.charmap['/'] = '-';
-
-export const StyleguideSection = ({
-	type,
-	isDefined,
-	title,
-	children
-}) => (
-	<div className={"sg-section sg-section--" + type + (isDefined ? " is-defined" : "")}>
-		<Heading level="2">{title}</Heading>
-		{children}
-	</div>
-);
 
 export default ({ 
 	name = "Generic Component",
@@ -40,27 +29,21 @@ export default ({
 	const slugy = name => slug(name);
 
 	return (
-		<StyleguidePage title={`${niceTitle} – Bandish Styleguide`} locals={locals}>
+		<StyleguideWrapper title={`${niceTitle} – Styleguide`} locals={locals}>
 			<Heading level="1">{niceTitle}</Heading>
-			
-			{ readme
-				? <StyleguideSection type="readme" title="Readme" isDefined={!!readme}>
-					 	<div className="readme" dangerouslySetInnerHTML={{ __html: readme }}></div> 
-					</StyleguideSection>
-				: undefined }
 	
 			{ tests	
-				? <div className="sg-section sg-section--tests sg-test">
-						<div className="sg-test__header">
+				? <div className="sg-styleguide-section">
+						<div className="sg-styleguide-section__header">
 							<Heading level="2">Tests</Heading>
 							
-							<div className="sg-test__selector">
+							<Rhythm size="small">
 								{ tests.map(e => 
 										<div><a
 											href={'#' + slug(e.name)} 
 											key={slug(e.name)} 
 											value={slug(e.name)}>{e.name}</a></div>) }
-							</div>
+							</Rhythm>
 						</div>
 							
 						{ tests.map(e =>
@@ -72,6 +55,6 @@ export default ({
 									component={e.component} />) }
 					</div>
 				: undefined }
-		</StyleguidePage>
+		</StyleguideWrapper>
 	)
 };
