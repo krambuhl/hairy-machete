@@ -52,7 +52,7 @@
 
 	&:hover {
 		background-color: #000.95;
-		box-shadow: #000.4 0 0.3em 1em;
+		box-shadow: #000.25 0 0.3em 1em;
 	}
 
 	& > span {

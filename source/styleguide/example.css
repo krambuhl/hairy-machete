@@ -11,8 +11,12 @@
 .sg-expample__anchor {
   display: block;
   position: relative;
-  top: -4.2em;
+  top: -5.5em;
   visibility: hidden;
+
+	@media (width >= 960px) {
+	  top: -7em;
+	}
 }
 
 .sg-example__header {
